@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+::selection {
+  @apply bg-sky-500 text-white;
+}
+
+* {
+  font-family: 'Manrope', 'Inter', sans-serif;
+}
+
+body {
+  font-family: 'Manrope', 'Inter', sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background-color: #000;
+}
+
+.body {
+  height: 100dvh;
+  @apply bg-black text-white h-screen scrollbar-hide;
+}
+
+.item {
+  @apply transition-colors duration-300 ease-out cursor-pointer;
+}
+
+.item:hover {
+  @apply bg-gray-100 bg-opacity-10
+}
+
+.item:active {
+  @apply scale-95 transition-transform duration-300 ease-in-out
+}
+
+.icon {
+  @apply flex items-center justify-center transition-colors duration-300 rounded-full cursor-pointer p-2
+}
+
+.icon:hover {
+  @apply bg-gray-800/80
+}
+
+.tooltip {
+  @apply mx-auto px-2 py-1 rounded-md text-white bg-gray-600 bg-opacity-80 backdrop-blur text-xs opacity-0 group-hover:opacity-100 hidden
+}
+
+.loader {
+  @apply bg-gradient-to-r from-neutral-900 to-zinc-900 animate-pulse
+}
+
+.spinner-container {
+  @apply flex items-center justify-center
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2.2px solid #bae6fd;
+  border-top-color: #0ea5e9;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+
+  100% {
+      transform: rotate(360deg);
+  }
+}
