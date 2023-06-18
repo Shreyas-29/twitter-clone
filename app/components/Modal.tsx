@@ -69,9 +69,9 @@ const Modal: React.FC<ModalProps> = ({
                     exit={{ opacity: 0, scale: -0.5 }}
                     transition={{ duration: 0.8, type: 'spring' }}
                     onSubmit={handleSubmit}
-                    className='bg-black flex flex-col py-10 px-10 shadow-2xl shadow-black/40 rounded-2xl z-50 h-auto w-full mx-10 md:max-w-md relative'
+                    className='bg-black flex flex-col px-6 py-8 md:py-10 md:px-10 shadow-2xl shadow-black/40 rounded-2xl z-50 h-auto w-full mx-4 md:mx-10 md:max-w-md relative'
                 >
-                    <div className='flex items-center justify-between p- rounded-t'>
+                    <div className='flex items-center justify-between rounded-t'>
                         <h3 className='text-2xl font-semibold'>
                             {title}
                         </h3>
@@ -79,7 +79,7 @@ const Modal: React.FC<ModalProps> = ({
                             <button
                                 type="button"
                                 disabled={isLoading}
-                                className="rounded-md bg-neutral-900 p-1 text-gray-400 hover:text-gray-300 outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 disabled:cursor-auto disabled:opacity-70"
+                                className="rounded-md bg-neutral-900 p-1 text-gray-400 hover:text-gray-300 outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
                                 onClick={onClose}
                             >
                                 <span className="sr-only">Close</span>

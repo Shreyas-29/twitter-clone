@@ -4,7 +4,7 @@ import { Header, Loader } from '@/app/components';
 import { Post, User } from '@prisma/client';
 import axios from 'axios';
 import { usePathname } from 'next/navigation';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { UserDetails } from '.';
 
 interface Tweet extends Post {
@@ -55,7 +55,9 @@ const TweetInfo: React.FC<TweetInfoProps> = ({
     return (
         <div className='scrollbar-hide'>
             {loading ? (
-                <Loader />
+                <div className='mt-20'>
+                    <Loader />
+                </div>
             ) : (
                 <div>
                     <Header

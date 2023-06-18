@@ -7,6 +7,7 @@ import { Tweet } from '@/app/components';
 import { Post, User } from '@prisma/client';
 import { usePathname } from 'next/navigation';
 import axios from 'axios';
+import { pusherClient } from '@/app/libs/pusher';
 
 
 interface TweetFeedProps {
@@ -19,10 +20,6 @@ const TweetFeed: React.FC<TweetFeedProps> = ({
     user,
     posts
 }) => {
-
-    const pathname = usePathname();
-
-    const userId = pathname?.split('/').pop();
 
     return (
         <div className='mt-8 pb-40 border-t border-neutral-800'>

@@ -4,7 +4,7 @@ import { BsTwitter } from 'react-icons/bs';
 
 const Loader = () => {
     return (
-        <div className='flex flex-col items-center justify-center mx-auto mt-20 w-full relative'>
+        <div className='flex flex-col items-center justify-center mx-auto w-full relative'>
             <div className="spinner-container">
                 <div className="spinner"></div>
             </div>

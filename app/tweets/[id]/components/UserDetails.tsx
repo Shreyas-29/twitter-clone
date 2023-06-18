@@ -40,7 +40,7 @@ const UserInfo: React.FC<UserInfoProps> = ({
                         <div className='flex items-start flex-1 gap-3'>
                             <Avatar url={tweet?.user?.profileImage!} />
                             <div className='flex flex-col items-start'>
-                                <h4 className='text-base font-semibold text-white'>
+                                <h4 className='text-base font-semibold text-white capitalize'>
                                     {tweet?.user?.name}
                                 </h4>
                                 <span className='text-sm text-gray-500'>
@@ -54,7 +54,7 @@ const UserInfo: React.FC<UserInfoProps> = ({
                     </div>
                     <div className='w-full flex flex-col items-start p-4'>
                         <div className='w-full'>
-                            <p className='flex flex-wrap text-gray-300 text-base'>
+                            <p className='flex flex-wrap text-gray-300 text-base whitespace-pre-wrap'>
                                 {tweet?.body}
                             </p>
                         </div>

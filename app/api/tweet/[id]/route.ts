@@ -1,10 +1,9 @@
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 import { pusherServer } from "@/app/libs/pusher";
-import { NextApiRequest } from "next";
+
 
 export async function DELETE(
-    request: NextApiRequest,
     tweetId: { params: { id: string } } | undefined
 ) {
 

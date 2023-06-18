@@ -4,7 +4,6 @@ import React, { useCallback, FormEvent, useState } from 'react';
 import { useLoginModal, useRegisterModal } from '@/app/hooks';
 import Input from '../Input';
 import Modal from '../Modal';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
 

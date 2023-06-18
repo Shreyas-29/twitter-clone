@@ -25,7 +25,7 @@ const SidebarProfile: React.FC<SidebarButtonProps> = ({
                 <div className='flex items-center justify-start gap-2'>
                     <div className='w-10 h-10 rounded-full'>
                         <Image
-                            src={currentUser?.profileImage! || '/images/user.png'}
+                            src={currentUser?.profileImage! || '/images/profile.png'}
                             alt={currentUser?.name!}
                             width={1000}
                             height={1000}

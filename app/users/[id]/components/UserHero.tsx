@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { User } from '@prisma/client';
 import { useEditModal, useLoginModal } from '@/app/hooks';
@@ -27,25 +27,6 @@ const UserHero: React.FC<UserHeroProps> = ({
 
     const [following, setFollowing] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-
-    // const handleFollow = useCallback(async () => {
-    //     setLoading(true);
-
-    //     try {
-
-    //         if (!currentUser) {
-    //             return loginModal.onOpen();
-    //         }
-
-
-    //     } catch (error) {
-    //         setLoading(false);
-    //         toast.error("Something went wrong!");
-    //         console.log('error', error);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }, [currentUser, userId, following, loginModal]);
 
     useEffect(() => {
         const fetchFollowingStatus = async () => {

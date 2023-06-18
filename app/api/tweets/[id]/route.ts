@@ -1,7 +1,4 @@
-import { useTweetStore } from "@/app/hooks";
 import prisma from "@/app/libs/prismadb";
-import { pusherClient } from "@/app/libs/pusher";
-import { Post } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 

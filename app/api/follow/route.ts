@@ -1,5 +1,6 @@
 import { getCurrentUser } from "@/app/actions";
 import prisma from "@/app/libs/prismadb";
+import { pusherServer } from "@/app/libs/pusher";
 import { NextResponse } from "next/server";
 
 
@@ -9,9 +10,7 @@ export async function POST(request: Request) {
         return new NextResponse('Method not allowed', { status: 405 });
     }
 
-
     try {
-
         const currentUser = await getCurrentUser();
 
         const body = await request.json();
@@ -36,6 +35,16 @@ export async function POST(request: Request) {
                 }
             });
 
+            await prisma.notification.updateMany({
+                where: {
+                    userId,
+                    body: `@${currentUser?.username} started following you`
+                },
+                data: {
+                    createdAt: new Date()
+                }
+            });
+
             return new NextResponse('Following', { status: 200 });
         } else {
             await prisma.user.update({
@@ -48,6 +57,25 @@ export async function POST(request: Request) {
                     }
                 }
             });
+
+            const notification = await prisma.notification.create({
+                data: {
+                    userId,
+                    body: `@${currentUser?.username} started following you`,
+                    createdAt: new Date(),
+                }
+            });
+
+            await prisma.user.update({
+                where: {
+                    id: userId
+                },
+                data: {
+                    hasNotification: true
+                }
+            });
+
+            pusherServer.trigger('notifications', 'notifications:new', notification);
 
             return new NextResponse('You are Unfollowing', { status: 200 });
         }

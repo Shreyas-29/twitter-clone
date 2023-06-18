@@ -1,7 +1,7 @@
 'use client';
 
 import { useLogoutModal } from '@/app/hooks';
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from '../Modal';
 import { toast } from 'react-hot-toast';
 import { signOut } from 'next-auth/react';
@@ -14,16 +14,21 @@ const LogoutModal = () => {
 
     const logoutModal = useLogoutModal();
 
+    const [loading, setLoading] = useState<boolean>(false);
+
     const handleLogout = async () => {
+        setLoading(true);
         signOut()
             .then(() => {
                 toast.success('You are successfully signed out!');
                 logoutModal.onClose();
                 router.push('/');
+                router.refresh();
+                setLoading(false);
             })
             .catch((error) => {
-                toast.error('Error signing out!');
                 console.error(error);
+                setLoading(false);
             });
     };
 
@@ -33,7 +38,7 @@ const LogoutModal = () => {
 
     const body = (
         <div className='flex flex-col gap-4'>
-            <h2 className='text-xl font-normal text-gray-200'>Are you sure to want to Logout?</h2>
+            <h2 className='text-xl font-normal text-gray-200'>Are you sure want to Logout?</h2>
             <div className='pt-2 flex items-end justify-end w-full gap-4'>
                 <Button
                     title='Close'
@@ -43,9 +48,10 @@ const LogoutModal = () => {
                 />
                 <Button
                     title='Logout'
-                    type='button'
+                    type='submit'
                     danger
                     onClick={handleLogout}
+                    disabled={loading}
                 />
             </div>
         </div>

@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import Image from 'next/image';
-import { IoCloseOutline, IoChevronDown, IoEarth, IoEar } from 'react-icons/io5';
-import { HiOutlineCalendar, HiOutlineChartBar, HiOutlineEmojiHappy, HiOutlineLocationMarker, HiOutlinePhotograph, HiX } from 'react-icons/hi';
+import { IoCloseOutline, IoChevronDown, IoEarth } from 'react-icons/io5';
+import { HiOutlineCalendar, HiOutlineChartBar, HiOutlineEmojiHappy, HiOutlineLocationMarker, HiOutlinePhotograph } from 'react-icons/hi';
 import { BsPersonFillCheck } from 'react-icons/bs';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
@@ -28,10 +28,10 @@ const InputBox: React.FC<InputBoxProps> = ({
 }) => {
 
     const loginModal = useLoginModal();
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const [input, setInput] = useState<string>("");
     const [showEmojis, setShowEmojis] = useState<boolean>(false);
-    const [selectedFile, setSelectedFile] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [audience, setAudience] = useState<Variant | string>('Everyone');
     const [dropdown, setDropdown] = useState<boolean>(false);
@@ -127,6 +127,18 @@ const InputBox: React.FC<InputBoxProps> = ({
         }
     };
 
+    const adjustTextareaHeight = () => {
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto'; // Reset the height to auto to recalculate the scroll height
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set the height to the scroll height
+        }
+    };
+
+    const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setInput(e.target.value);
+        adjustTextareaHeight();
+    }
+
     // generate images of futuristic cities
 
 
@@ -134,14 +146,14 @@ const InputBox: React.FC<InputBoxProps> = ({
         <div className='flex flex-col items-center justify-center w-full'>
             <div className={`border-b border-neutral-800 flex w-full space-x-3 px-4 py-3 relative ${isLoading && 'opacity-70'}`}>
                 <Image
-                    src={currentUser?.profileImage! || '/images/user.png'}
+                    src={currentUser?.profileImage! || '/images/profile.png'}
                     alt='User Image'
                     width={1000}
                     height={1000}
                     className='w-12 h-12 rounded-full object-cover hover:brightness-110'
                 />
                 <div className='w-full'>
-                    <div className={`${selectedFile && 'pb-8'} ${isLoading && 'pt-2'} relative`}>
+                    <div className={`${isImageSelected && 'pb-8'} ${isLoading && 'pt-2'} relative`}>
                         {showAudience && !isLoading && (
                             <div className='py-1 pb-2'>
                                 <div
@@ -188,8 +200,9 @@ const InputBox: React.FC<InputBoxProps> = ({
                         <textarea
                             name='Tweet'
                             value={input}
+                            ref={textareaRef}
                             placeholder="What's Happening?"
-                            onChange={(e) => setInput(e.target.value)}
+                            onChange={handleInputChange}
                             onFocus={() => setShowAudience(true)}
                             rows={1}
                             disabled={isLoading}
@@ -200,7 +213,7 @@ const InputBox: React.FC<InputBoxProps> = ({
                                 <button
                                     disabled={isLoading}
                                     onClick={() => setSelectedImagePreview('')}
-                                    className='absolute w-8 h-8 bg-neutral-800/60 hover:bg-neutral-700 bg-opacity-75 rounded-xl flex items-center justify-center top-1 right-1 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed'
+                                    className='absolute w-8 h-8 bg-neutral-800/60 hover:bg-neutral-700 bg-opacity-75 rounded-xl flex items-center justify-center top-1 right-1 cursor-auto disabled:opacity-70 disabled:cursor-not-allowed'
                                 >
                                     <IoCloseOutline className='w-6 h-6 text-white' />
                                 </button>
@@ -249,11 +262,13 @@ const InputBox: React.FC<InputBoxProps> = ({
                                         Schedule
                                     </p>
                                 </div>
-                                <div className='icon group relative cursor-not-allowed'>
-                                    <HiOutlineLocationMarker className='h-5 w-5 text-sky-500 opacity-50 cursor-not-allowed' />
+                                <div className='hidden md:block'>
+                                    <div className='icon group relative cursor-not-allowed'>
+                                        <HiOutlineLocationMarker className='h-5 w-5 text-sky-500 opacity-50 cursor-not-allowed' />
+                                    </div>
                                 </div>
                                 {showEmojis && (
-                                    <div className='hidden sm:flex absolute top-12 sm:top-14 sm:left-3 shadow-2xl shadow-neutral-800/50 z-[100]'>
+                                    <div className='hidden sm:flex absolute top-12 -left-20 sm:top-14 sm:left-3 shadow-2xl shadow-neutral-800/50 z-[100]'>
                                         <Picker
                                             onEmojiSelect={addEmoji}
                                             data={data}
@@ -265,7 +280,7 @@ const InputBox: React.FC<InputBoxProps> = ({
                             <div className='flex items-center justify-end ml-auto'>
                                 <button
                                     onClick={upload}
-                                    disabled={!input.trim() && !selectedFile}
+                                    disabled={!input.trim() && !isImageSelected}
                                     className='px-4 py-2 text-sm rounded-full text-white font-medium hover:bg-[#1a8cd8] bg-sky-500 disabled:opacity-50 disabled:cursor-auto cursor-pointer'
                                 >
                                     Tweet

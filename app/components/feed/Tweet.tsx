@@ -57,8 +57,8 @@ const Tweet: React.FC<TweetProps> = ({
         router.push(`/users/${tweet?.userId}`);
     }, [router, tweet?.userId]);
 
-
-    const handleDeleteTweet = useCallback(async (tweetId: string | undefined) => {
+    const handleDeleteTweet = useCallback(async (tweetId: string | undefined, event: React.MouseEvent<HTMLDivElement>) => {
+        event.stopPropagation();
         setLoading(true);
 
         await axios.delete(`/api/tweet/${tweetId}`)
@@ -99,7 +99,7 @@ const Tweet: React.FC<TweetProps> = ({
                                             {tweet?.user?.name}
                                         </h4>
                                         <div className='flex items-center'>
-                                            <span className='text-sm text-gray-500'>
+                                            <span className='text-sm text-gray-500 lowercase'>
                                                 @{tweet?.user?.username}
                                             </span>
                                             <span className='mx-1 text-gray-400'>·</span>
@@ -109,7 +109,7 @@ const Tweet: React.FC<TweetProps> = ({
                                         </div>
                                     </div>
                                     <div className='w-full'>
-                                        <p className='flex flex-wrap text-gray-300 text-base'>
+                                        <p className='flex flex-wrap text-gray-300 text-base whitespace-pre-wrap'>
                                             {tweet?.body}
                                         </p>
                                     </div>
@@ -123,7 +123,7 @@ const Tweet: React.FC<TweetProps> = ({
                             {tweet?.image && (
                                 <Image
                                     src={tweet?.image!}
-                                    alt='file'
+                                    alt='Image'
                                     unoptimized
                                     priority={true}
                                     width={1000}
@@ -167,7 +167,7 @@ const Tweet: React.FC<TweetProps> = ({
                                                 Pin to profile
                                             </span>
                                         </div>
-                                        <div onClick={() => handleDeleteTweet(tweet?.id)} className={`flex items-center justify-between w-full hover:bg-neutral-900/60 px-5 py-3 text-rose-500 pb-4 rounded-b-2xl ${loading && 'opacity-70 cursor-not-allowed'}`}>
+                                        <div onClick={(e) => handleDeleteTweet(tweet?.id, e)} className={`flex items-center justify-between w-full hover:bg-neutral-900/60 px-5 py-3 text-rose-500 pb-4 rounded-b-2xl ${loading && 'opacity-70 cursor-not-allowed'}`}>
                                             <div className='flex items-center w-full gap-3'>
                                                 <IoTrashOutline className='w-5 h-5 text-current' />
                                                 <span className='text-sm'>
@@ -217,8 +217,8 @@ const Tweet: React.FC<TweetProps> = ({
                         )}
                     </AnimatePresence>
                 </div>
-                <div className='pt-2 w-full'>
-                    <TweetItem tweet={tweet} />
+                <div className='py-2 w-full'>
+                    <TweetItem tweet={tweet} user={user} />
                 </div>
             </div>
         </div>

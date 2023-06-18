@@ -105,7 +105,6 @@ const EditModal: React.FC<EditModalProps> = ({
             setName(data.name);
             setUsername(data.username);
             setBio(data.bio);
-
         });
 
         return () => {

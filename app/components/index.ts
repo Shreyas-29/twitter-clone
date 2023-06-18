@@ -21,6 +21,7 @@ import LikeButton from "./feed/LikeButton";
 import ImageUpload from "../users/[id]/components/ImageUpload";
 import Loader from "./Loader";
 import Updates from "./follow/Updates";
+import BottomNav from "./sidebar/BottomNav";
 
 
 
@@ -48,5 +49,6 @@ export {
     ImageUpload,
     Loader,
     Updates,
+    BottomNav
 
 }

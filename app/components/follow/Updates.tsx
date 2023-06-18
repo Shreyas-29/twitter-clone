@@ -5,9 +5,6 @@ import { getUpdates } from '@/app/graphql';
 import { CgSpinner } from 'react-icons/cg';
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
 
-interface UpdatesProps {
-
-}
 
 const Updates = () => {
 

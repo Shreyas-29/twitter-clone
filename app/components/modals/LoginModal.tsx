@@ -1,7 +1,7 @@
 'use client';
 
 import { useLoginModal, useRegisterModal } from '@/app/hooks';
-import React, { FormEvent, useCallback, useEffect, useState } from 'react';
+import React, { FormEvent, useCallback, useState } from 'react';
 import Input from '../Input';
 import Modal from '../Modal';
 import { toast } from 'react-hot-toast';

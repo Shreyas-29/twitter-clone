@@ -30,7 +30,7 @@ const Progressbar: React.FC<ProgressbarProps> = ({ isLoading, progress }) => {
         <div className="w-full h-[2.5px] bg-transparent rounded-full">
             {isLoading && (
                 <motion.div
-                    className="h-full bg-sky-500 rounded-full transition-transform duration-500"
+                    className="h-full bg-gradient-to-r from-sky-400 to-blue-500 rounded-full transition-transform duration-500"
                     style={{
                         width: `${progress}%`,
                     }}

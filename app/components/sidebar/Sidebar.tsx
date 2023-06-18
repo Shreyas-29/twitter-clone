@@ -9,6 +9,7 @@ import { User } from '@prisma/client';
 import SidebarProfile from './SidebarProfile';
 import SidebarButton from './SidebarButton';
 import SidebarItem from './SidebarItem';
+import { toast } from 'react-hot-toast';
 
 
 interface SidebarProps {
@@ -28,9 +29,26 @@ const Sidebar: React.FC<SidebarProps> = ({
     const handleProfile = () => {
         if (!currentUser) {
             loginModal.onOpen();
-        } else {
-            router.push(`/users/${currentUser?.id}`);
+            return;
         }
+    };
+
+    const handleNotification = () => {
+        if (!currentUser) {
+            toast.promise(
+                new Promise((resolve) => {
+                    setTimeout(resolve, 2000);
+                }),
+                {
+                    loading: 'Please wait...',
+                    success: 'Please sign in to access',
+                    error: 'Please sign in to access',
+                }
+            );
+            return;
+        };
+
+        router.push('/notifications')
     };
 
     const handleLogout = () => {
@@ -49,7 +67,8 @@ const Sidebar: React.FC<SidebarProps> = ({
             id: 2,
             title: 'Notifications',
             href: '/notifications',
-            icon: IoNotificationsOutline
+            icon: IoNotificationsOutline,
+            onClick: handleNotification
         },
         {
             id: 3,
@@ -62,13 +81,12 @@ const Sidebar: React.FC<SidebarProps> = ({
             title: 'Profile',
             href: `/users/${currentUser?.id}`,
             icon: IoPersonOutline,
-            onClick: handleProfile()
+            onClick: handleProfile
         },
     ];
 
-
     return (
-        <div className='col-span-1 max-h-screen pr-4 md:pr-6'>
+        <div className='col-span-1 max-h-screen pr-4 md:pr-6 hidden md:block to-neutral-800'>
             <div className='flex flex-col items-end h-full'>
                 <div className='flex flex-col items-start justify-between lg:w-[230px] h-full'>
                     <div className='w-full h-full'>
@@ -88,7 +106,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                                     href={item.href}
                                     title={item.title}
                                     icon={item.icon}
-                                    onClick={handleProfile}
+                                    onClick={item.onClick}
                                 />
                             ))}
                             {currentUser && (

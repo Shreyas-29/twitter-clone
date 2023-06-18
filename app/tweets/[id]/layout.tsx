@@ -1,6 +1,7 @@
 import React from 'react';
 import { TweetInfo } from './components';
 import { getCurrentUser } from '@/app/actions';
+import { EditModal, LoginModal, LogoutModal, RegisterModal } from '@/app/components';
 
 
 export const metadata = {
@@ -18,8 +19,12 @@ export default async function TweetPageLayout({
     const currentUser = await getCurrentUser();
 
     return (
-        <div className='scrollbar-hide overflow-y-scroll'>
+        <div>
             {children}
+            <RegisterModal />
+            <LoginModal />
+            <LogoutModal />
+            <EditModal user={currentUser} />
             <TweetInfo currentUser={currentUser} />
         </div>
     )

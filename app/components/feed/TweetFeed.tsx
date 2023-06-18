@@ -7,13 +7,16 @@ import { pusherClient } from '@/app/libs/pusher';
 import { motion, AnimatePresence } from 'framer-motion';
 import Loader from '../Loader';
 
-
 interface TweetFeedProps {
     currentUser: User | null;
+    liked?: boolean;
+    count2?: number;
 }
 
 const TweetFeed: React.FC<TweetFeedProps> = ({
-    currentUser
+    currentUser,
+    liked,
+    count2
 }) => {
 
     const [tweets, setTweets] = useState<any[]>([]);
@@ -33,7 +36,6 @@ const TweetFeed: React.FC<TweetFeedProps> = ({
             }
         };
 
-        // Fetch initial tweets
         fetchInitialTweets();
 
         const channel = pusherClient.subscribe('tweets');
@@ -70,7 +72,9 @@ const TweetFeed: React.FC<TweetFeedProps> = ({
     return (
         <div className='pb-40'>
             {loading ? (
-                <Loader />
+                <div className='mt-20'>
+                    <Loader />
+                </div>
             ) : (
                 <AnimatePresence initial={false}>
                     {tweets?.map((tweet: any, index: number) => (
@@ -80,7 +84,6 @@ const TweetFeed: React.FC<TweetFeedProps> = ({
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.4, type: 'keyframes', ease: 'easeInOut' }}
-                            // transition={{ duration: 0.7, type: 'spring', mass: 0.5, stiffness: 200 }}
                             style={{ zIndex: tweets.length - index }}
                         >
                             <Tweet

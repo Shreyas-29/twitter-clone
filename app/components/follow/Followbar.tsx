@@ -1,8 +1,8 @@
-
+'use client';
 
 import { User } from '@prisma/client';
 import React from 'react';
-import { IoSearchOutline, IoEllipsisHorizontalSharp } from 'react-icons/io5';
+import { IoSearchOutline } from 'react-icons/io5';
 import FollowCard from './FollowCard';
 import Updates from './Updates';
 
@@ -16,7 +16,7 @@ const Followbar: React.FC<FollowBarProps> = ({
 }) => {
 
     return (
-        <div className='pl-4 py-4 hidden lg:block flex-1 lg:col-span-1'>
+        <div className='pl-4 py-4 hidden md:block lg:col-span-1'>
             <div className='sticky pb-2 top-0 left-0'>
                 <div className='px-5 py-2 rounded-full bg-zinc-900/80 hover:bg-zinc-800 hover:bg-opacity-70 cursor-pointer border-y border-neutral-800 focus-within:border focus-within:border-sky-500 flex items-start relative'>
                     <IoSearchOutline className='absolute focus-within:text-sky-500 top-2.5 left-4 w-5 h-5 text-gray-400' />
