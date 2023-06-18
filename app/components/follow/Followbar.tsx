@@ -30,7 +30,7 @@ const Followbar: React.FC<FollowBarProps> = ({
             </div>
             <div className='flex flex-col items-start pt-4 rounded-2xl bg-[#16181c]/80 my-5'>
                 <h3 className='text-xl font-semibold mx-4'>
-                    What's happening
+                    What&apos;s happening
                 </h3>
                 <div className='space-y-4 mt-4 w-full'>
                     <Updates />

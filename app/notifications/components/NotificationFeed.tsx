@@ -72,7 +72,7 @@ const NotificationFeed: React.FC<NotificationFeedProps> = ({
             channel.unbind('notifications:new', newNotificationHandler);
         }
 
-    }, [currentUser?.id]);
+    }, [currentUser?.id, currentUser]);
 
     const handleTabClick = (tab: Variant) => {
         setActiveTab(tab);

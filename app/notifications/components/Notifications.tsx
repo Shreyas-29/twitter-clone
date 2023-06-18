@@ -47,7 +47,7 @@ const Notifications: React.FC<NotificationsProps> = ({
             )}
 
             {notifications?.map((notification) => (
-                <div className='flex items-center justify-start gap-3 w-full px-4 py-3 bg-transparent hover:bg-[#16181c] cursor-pointer transition-colors duration-500 ease-out border-b border-neutral-800 select-none'>
+                <div key={notification?.id} className='flex items-center justify-start gap-3 w-full px-4 py-3 bg-transparent hover:bg-[#16181c] cursor-pointer transition-colors duration-500 ease-out border-b border-neutral-800 select-none'>
                     <div className='w-8 h-8 flex items-center justify-center'>
                         <BsTwitter className='w-6 h-6 text-white' />
                     </div>

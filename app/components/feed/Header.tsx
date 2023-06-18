@@ -30,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({
 
     const handleProfile = useCallback(() => {
         router.push(`/users/${user?.id}`);
-    }, [router]);
+    }, [router, user?.id]);
 
 
     return (

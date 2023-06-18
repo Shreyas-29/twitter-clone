@@ -76,7 +76,7 @@ const Tweet: React.FC<TweetProps> = ({
                 setLoading(false);
             });
 
-    }, [router, tweet?.id]);
+    }, [router]);
 
     useEffect(() => {
 
