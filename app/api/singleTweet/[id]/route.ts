@@ -1,9 +1,8 @@
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next";
 
 export async function GET(
-    request: NextApiRequest,
+    request: Request,
     id: { params: { id: string } } | undefined
 ) {
 
