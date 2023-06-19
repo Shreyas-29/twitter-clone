@@ -31,6 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             loginModal.onOpen();
             return;
         }
+        router.push(`/users/${currentUser?.id}`)
     };
 
     const handleNotification = () => {

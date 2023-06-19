@@ -6,6 +6,7 @@ import { IoArrowBack } from 'react-icons/io5';
 import { HiOutlineLightningBolt } from 'react-icons/hi';
 import Avatar from '../Avatar';
 import { User } from '@prisma/client';
+import { useLoginModal } from '@/app/hooks';
 
 
 interface HeaderProps {
@@ -23,6 +24,8 @@ const Header: React.FC<HeaderProps> = ({
 
     const router = useRouter();
 
+    const loginModal = useLoginModal();
+
     const handleClick = useCallback(() => {
         router.back();
     }, [router]);
@@ -31,6 +34,10 @@ const Header: React.FC<HeaderProps> = ({
     const handleProfile = useCallback(() => {
         router.push(`/users/${user?.id}`);
     }, [router, user?.id]);
+
+    const handleLogin = useCallback(() => {
+        loginModal.onOpen();
+    }, [loginModal]);
 
 
     return (
@@ -52,6 +59,11 @@ const Header: React.FC<HeaderProps> = ({
                 {user && (
                     <div onClick={handleProfile} className='block md:hidden'>
                         <Avatar url={user?.profileImage!} small />
+                    </div>
+                )}
+                {!user && (
+                    <div onClick={handleLogin} className='block md:hidden'>
+                        <Avatar url={'/images/profile.png'} small />
                     </div>
                 )}
             </div>
