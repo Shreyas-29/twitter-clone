@@ -35,7 +35,6 @@ const TweetInfo: React.FC<TweetInfoProps> = ({
         const fetchTweets = async () => {
             try {
                 if (!tweetId) {
-                    console.log("Tweets not found");
                     return;
                 }
                 const response = await axios.get(`/api/singleTweet/${tweetId}`);

@@ -32,8 +32,6 @@ export async function POST(
 
         const liked = tweet.likedIds.includes(currentUser?.id);
 
-        console.log('Liked', liked);
-
         if (liked) {
             const updateLikeIds = tweet.likedIds.filter((id) => id !== currentUser?.id);
 

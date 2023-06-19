@@ -40,7 +40,6 @@ const NotificationFeed: React.FC<NotificationFeedProps> = ({
                     const data = response.data;
                     setNotifications(data);
                     setLoading(false);
-                    console.log("Notifications", data);
                 } else {
                     console.log('Error fetching notifications:', response.status);
                 }
@@ -59,7 +58,6 @@ const NotificationFeed: React.FC<NotificationFeedProps> = ({
                 if (prevNotifications.some((notification) => notification.id === newNotification.id)) {
                     return prevNotifications;
                 }
-                console.log("New Notification", newNotification);
 
                 return [newNotification, ...prevNotifications];
             });

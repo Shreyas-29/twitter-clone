@@ -59,7 +59,6 @@ const UserHero: React.FC<UserHeroProps> = ({
                 toast.success(`You are ${following ? 'un' : ''}following @${user?.username}`);
 
             } else {
-                console.log("Error status 500");
                 toast.error("Something went wrong");
             }
         } catch (error) {

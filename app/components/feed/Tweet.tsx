@@ -60,22 +60,7 @@ const Tweet: React.FC<TweetProps> = ({
     const handleDeleteTweet = useCallback(async (tweetId: string | undefined, event: React.MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
         setLoading(true);
-        console.log('Tweet ID', tweetId);
 
-        // await axios.delete(`/api/tweet/${tweetId}`)
-        //     .then(() => {
-        //         setShowInfo(false);
-        //         toast.success("Tweet has been deleted!");
-        //         router.refresh();
-        //     })
-        //     .catch((error) => {
-        //         toast.error("Oops! Something went wrong.");
-        //         console.error(error);
-        //         setLoading(false);
-        //     })
-        //     .finally(() => {
-        //         setLoading(false);
-        //     });
         try {
             await axios.delete(`/api/post/${tweetId}`);
 

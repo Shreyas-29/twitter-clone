@@ -15,10 +15,7 @@ export async function DELETE(
     // const { tweetId } = params;
     const tweetId = params?.tweetId;
 
-    console.log("Tweet ID", tweetId);
-
     if (!tweetId) {
-        console.log('Tweet id required')
         return new NextResponse('Tweet ID is required', { status: 400 });
     }
 
