@@ -13,8 +13,6 @@ export async function GET(
 
         const tweetId: string | undefined = id?.params?.id;
 
-        console.log("Tweet ID: ", tweetId);
-
         const tweet = await prisma.post.findUnique({
             where: {
                 id: tweetId
@@ -27,7 +25,6 @@ export async function GET(
         // check if the currnetuser id includes in that post like ids then remove it return count-1
 
         const count = tweet?.likedIds.length || 0;
-        console.log("Count", count);
 
         return NextResponse.json(count, { status: 200 });
 

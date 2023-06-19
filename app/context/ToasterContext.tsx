@@ -7,8 +7,9 @@ const ToasterContext = () => {
 
     const customToastStyle = {
         background: '#1f2937',
-        borderRadius: '8px',
+        borderRadius: '5px',
         color: '#fff',
+        fontSize: '14px',
     };
 
     const customToastOptions = {

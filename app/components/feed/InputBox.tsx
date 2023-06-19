@@ -51,12 +51,12 @@ const InputBox: React.FC<InputBoxProps> = ({
 
     const toggleAudience = (text: Variant) => {
         setAudience(text);
-        window.localStorage.setItem('audience', text);
+        typeof window !== undefined && localStorage.setItem('audience', text);
         setDropdown(false);
     };
 
     useEffect(() => {
-        let text = window.localStorage.getItem('audience');
+        let text = typeof window !== undefined && localStorage.getItem('audience');
         setAudience(text as string);
     }, []);
 

@@ -20,8 +20,6 @@ export async function GET(
             return new NextResponse('Tweet ID is required', { status: 400 });
         }
 
-        console.log("Tweet ID for like: ", tweetId);
-
         const tweet = await prisma.post.findUnique({
             where: {
                 id: tweetId

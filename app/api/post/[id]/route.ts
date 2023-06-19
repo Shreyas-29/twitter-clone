@@ -1,19 +1,28 @@
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
-import { NextResponse } from "next/server";
 import { pusherServer } from "@/app/libs/pusher";
 
+interface IParams {
+    id?: string;
+}
 
 export async function DELETE(
-    tweetId: { params: { id: string } } | undefined
+    request: NextRequest,
+    { params }: { params: IParams }
 ) {
+    const tweetId = params?.id;
 
-    const id = tweetId?.params.id;
+    console.log("Tweet ID", tweetId, 'params: ', params);
+
+    if (!tweetId) {
+        console.log('Tweet ID required');
+        return new NextResponse('Tweet ID is required', { status: 400 });
+    }
 
     try {
-
         const existingTweet = await prisma.post.findUnique({
             where: {
-                id: id,
+                id: tweetId,
             },
             include: {
                 user: true,
@@ -21,24 +30,21 @@ export async function DELETE(
         });
 
         if (!existingTweet) {
-            return new NextResponse('Invalid ID', { status: 400 });
+            return new NextResponse('Tweet not found', { status: 404 });
         }
 
         const deleteTweet = await prisma.post.delete({
             where: {
-                id: id
-            }
+                id: tweetId,
+            },
         });
 
         if (deleteTweet) {
-            pusherServer.trigger("tweets", "tweets:remove", id);
-            return NextResponse.json(deleteTweet, { status: 200 });
+            pusherServer.trigger('tweets', 'tweets:remove', tweetId);
+            return new NextResponse(JSON.stringify(deleteTweet), { status: 200 });
+        } else {
+            throw new Error('Failed to delete tweet');
         }
-        else {
-            throw new Error("Failed to delete tweet");
-        }
-
-
     } catch (error) {
         console.log(error);
         return new NextResponse('Error', { status: 500 });
