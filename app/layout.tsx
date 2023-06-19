@@ -33,7 +33,7 @@ export default async function RootLayout({
           <LoginModal />
           <LogoutModal />
           <EditModal user={currentUser} />
-          <div className='w-full h-60 bg-gradient-to-t from-sky-200/50 to-white/50 blur-3xl opacity-20 absolute -top-20 left-8' />
+          <div className='w-96 h-60 bg-gradient-to-t from-sky-200/80 to-white/60 blur-3xl opacity-20 absolute top-2 left-56' />
           <div className='container h-full mx-auto xl:px-24 max-w-[1360px]'>
             <div className='grid grid-cols-4 h-full w-full'>
               <Sidebar currentUser={currentUser} />

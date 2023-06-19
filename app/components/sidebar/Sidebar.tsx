@@ -55,13 +55,18 @@ const Sidebar: React.FC<SidebarProps> = ({
         logoutModal.onOpen();
     };
 
+    const handleHome = () => {
+        router.push('/');
+    };
+
 
     const items = [
         {
             id: 1,
             title: 'Home',
             href: '/',
-            icon: IoHomeOutline
+            icon: IoHomeOutline,
+            onClick: handleHome
         },
         {
             id: 2,
@@ -92,9 +97,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                     <div className='w-full h-full'>
                         <div className='flex items-start py-2'>
                             <div
-                                onClick={() => router.push('/')}
+                                onClick={handleHome}
                                 className='flex items-center justify-start w-14'>
-                                <div className='hover:bg-sky-500 text-white transition duration-300 hover:text-sky-500 hover:bg-opacity-10 cursor-pointer rounded-full p-3 lg:ml-2 active:scale-90'>
+                                <div className='hover:bg-sky-500 text-white transition duration-300 hover:text-sky-500 hover:bg-opacity-10 cursor-pointer rounded-full p-3 lg:ml-2 active:scale-90 z-50'>
                                     <BsTwitter className='w-6 h-6' />
                                 </div>
                             </div>
