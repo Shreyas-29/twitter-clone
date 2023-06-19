@@ -6,6 +6,7 @@ import SidebarItem from './SidebarItem';
 import { useLoginModal, useLogoutModal } from '@/app/hooks';
 import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
 
 
 interface BottomNavProps {
@@ -32,7 +33,35 @@ const BottomNav: React.FC<BottomNavProps> = ({
             loginModal.onOpen();
             return;
         }
+        router.push(`/users/${user?.id}`)
     };
+
+    const handleNotification = () => {
+        if (!user) {
+            toast.promise(
+                new Promise((resolve) => {
+                    setTimeout(resolve, 2000);
+                }),
+                {
+                    loading: 'Please wait...',
+                    success: 'Please sign in to access',
+                    error: 'Please sign in to access',
+                }
+            );
+            return;
+        };
+
+        router.push('/notifications')
+    };
+
+    const handleHome = () => {
+        router.push('/');
+    };
+
+    const handleBookmark = () => {
+        router.push('/bookmarks');
+    };
+
 
     const items = [
         {
@@ -40,25 +69,27 @@ const BottomNav: React.FC<BottomNavProps> = ({
             title: 'Home',
             href: '/',
             icon: IoHomeOutline,
-            onClick: () => router.push('/')
+            onClick: handleHome
         },
         {
             id: 2,
             title: 'Notifications',
             href: '/notifications',
-            icon: IoNotificationsOutline
+            icon: IoNotificationsOutline,
+            onClick: handleNotification
         },
         {
             id: 3,
             title: 'Bookmarks',
             href: '/bookmarks',
             icon: IoBookmarkOutline,
-            small: true
+            small: true,
+            onClick: handleBookmark
         },
         {
             id: 4,
             title: 'Profile',
-            href: `${user ? `/users/${user?.id}` : '/'}`,
+            href: `/users/${user?.id}`,
             icon: IoPersonOutline,
             onClick: handleProfile
         },

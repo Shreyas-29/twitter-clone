@@ -52,7 +52,7 @@ const TweetInfo: React.FC<TweetInfoProps> = ({
 
 
     return (
-        <div className='scrollbar-hide'>
+        <div className='scrollbar-hide pb-40'>
             {loading ? (
                 <div className='mt-20'>
                     <Loader />

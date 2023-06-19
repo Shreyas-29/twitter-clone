@@ -92,7 +92,7 @@ const UserInfo: React.FC<UserInfoProps> = ({
     }, [userId]);
 
     return (
-        <div>
+        <div className='pb-40'>
             {loading ? (
                 <div className='mt-20'>
                     <Loader />

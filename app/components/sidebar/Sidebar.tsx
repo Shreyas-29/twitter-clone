@@ -60,6 +60,10 @@ const Sidebar: React.FC<SidebarProps> = ({
         router.push('/');
     };
 
+    const handleBookmark = () => {
+        router.push('/bookmarks');
+    };
+
 
     const items = [
         {
@@ -80,7 +84,8 @@ const Sidebar: React.FC<SidebarProps> = ({
             id: 3,
             title: 'Bookmarks',
             href: '/bookmarks',
-            icon: IoBookmarkOutline
+            icon: IoBookmarkOutline,
+            onClick: handleBookmark
         },
         {
             id: 4,
